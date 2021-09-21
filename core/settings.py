@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from django.urls import reverse
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent

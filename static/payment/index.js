@@ -83,9 +83,4 @@ var postCode = document.getElementById("postCode").value;
     },
     error: function (xhr, errmsg, err) {},
   });
-
-
-
 });
-
-

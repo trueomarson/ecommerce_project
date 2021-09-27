@@ -42,6 +42,7 @@ def BasketView(request):
 def stripe_webhook(request):
     payload = request.body
     event = None
+    print('12312312')
 
     try:
         event = stripe.Event.construct_from(

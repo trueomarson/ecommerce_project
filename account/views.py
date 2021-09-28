@@ -83,9 +83,3 @@ def account_activate(request, uidb64, token):
         return redirect('account:dashboard')
     else:
         return render(request, 'account/registration/activation_invalid.html')
-
-
-        
-
-        
-

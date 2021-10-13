@@ -1,10 +1,13 @@
 import json
+import os
+
 import stripe
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
+from django.conf import settings
 
 from basket.basket import Basket
 from orders.views import payment_confirmation
@@ -28,21 +31,21 @@ def BasketView(request):
     total = total.replace('.', '')
     total = int(total)
 
-    stripe.api_key = 'sk_test_51JVF0JK6v6fVXC6Sy3Hcr3HxH9kJm05fU8MRqhMzvI96NtJzoTMeQs0SwYyM2qHN91ZNYE65JtdHr8H53J65Wl5800l4kEOLeL'
+    stripe.api_key = settings.STRIPE_SECRET_KEY
     intent = stripe.PaymentIntent.create(
         amount=total,
-        currency='eur',
+        currency='gbp',
         metadata={'userid': request.user.id}
     )
 
-    return render(request, 'payment/home.html', {'client_secret': intent.client_secret})
+    return render(request, 'payment/payment_form.html', {'client_secret': intent.client_secret, 
+                                                            'STRIPE_PUBLISHABLE_KEY': os.environ.get('STRIPE_PUBLISHABLE_KEY')})
 
 
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
     event = None
-    print('12312312')
 
     try:
         event = stripe.Event.construct_from(
@@ -60,4 +63,3 @@ def stripe_webhook(request):
         print('Unhandled event type {}'.format(event.type))
 
     return HttpResponse(status=200)
-

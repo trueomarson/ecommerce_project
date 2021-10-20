@@ -13,4 +13,17 @@ from .models import (
 
 admin.site.register(Category, MPTTModelAdmin)
 
+class ProductSpecialisationInline(admin.TabularInline):
+    model = ProductSpecification
+
+@admin.register(ProductType)
+class ProductTypeAdmin(admin.ModelAdmin):
+    inlines = [
+        ProductSpecialisationInline,
+    ]
+
+class ProductImageInline(admin.TabularInline):
+
+
+
 

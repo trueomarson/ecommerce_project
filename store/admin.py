@@ -23,6 +23,10 @@ class ProductTypeAdmin(admin.ModelAdmin):
     ]
 
 class ProductImageInline(admin.TabularInline):
+    model = ProductImage
+
+class ProductSpecificationonValueInline(admin.TabularInline):
+    
 
 
 

@@ -1,10 +1,10 @@
 Package List 
 
 django
-black 
-isort 
-mptt 
-pillow 
-stripe 
-coverage 
+black
+isort
+django-mptt
+pillow
+stripe
+coverage
 six

@@ -3,7 +3,7 @@ from .models import Category, Product
 
 
 def product_all(request):
-    products = Product.products.prefetch_rellated("product_image").filter(is_active=True)
+    products = Product.products.prefetch_related("product_image").filter(is_active=True)
     return render(request, 'store/index.html', {'products': products})
 
 
